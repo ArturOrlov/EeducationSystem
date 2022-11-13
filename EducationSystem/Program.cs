@@ -1,24 +1,20 @@
 using System.Text;
+using EducationSystem.Bootstrap;
 using EducationSystem.Context;
-using EducationSystem.Entities.DbModels;
 using EducationSystem.Entities.DbModels.Identity;
+using EducationSystem.Extension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-// builder.Services.AddCors();
-builder.Services.AddControllers();
+ConfigurationManager configuration = builder.Configuration;
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 builder.Services.AddDbContext<EducationSystemDbContext>(o =>
     o.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddIdentity<User, Role>(identityOptions =>
     {
@@ -29,7 +25,38 @@ builder.Services.AddIdentity<User, Role>(identityOptions =>
         identityOptions.User.RequireUniqueEmail = false;
         identityOptions.Password.RequireDigit = false;
     })
-    .AddEntityFrameworkStores<EducationSystemDbContext>();
+    .AddEntityFrameworkStores<EducationSystemDbContext>()
+    .AddDefaultTokenProviders();
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.Zero,
+            ValidIssuer = configuration["Jwt:ValidIssuer"],
+            ValidAudience = configuration["Jwt:ValidAudience"],
+            IssuerSigningKey = new SymmetricSecurityKey
+                (Encoding.UTF8.GetBytes(configuration["Jwt:Secret"]))
+        };
+    });
+
+builder.Services.AddCustomServices();
+builder.Services.AddCustomRepository();
+
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -60,7 +87,7 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new string[] { }
+            Array.Empty<string>()
         }
     });
 });
@@ -70,46 +97,22 @@ builder.Services.ConfigureSwaggerGen(options =>
     options.CustomSchemaIds(x => x.FullName);
 });
 
-builder.Services.AddLogging();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Jwt:Issuer"],
-        ValidAudience = builder.Configuration["Jwt:Issuer"],
-        IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-    };
-});
-
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication();
-
 var app = builder.Build();
+var serviceScope = app.Services.CreateScope();
+var services = serviceScope.ServiceProvider;
+var bootstrap = services.GetRequiredService<Bootstrap>();
+await bootstrap.SeedDb();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Autobonus backend API"); });
+    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "ElectronicDiary backend API"); });
 }
 
-// app.UseHttpsRedirection();
-app.UseRouting();
-
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-);
-
+app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+app.MapControllers();
 
 app.Run();

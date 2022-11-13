@@ -1,4 +1,5 @@
 ﻿using EducationSystem.Context;
+using EducationSystem.Entities.Base;
 using EducationSystem.Interfaces.IRepositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +7,7 @@ namespace EducationSystem.Repositories;
 
 public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
 {
-    private readonly EducationSystemDbContext _context;
+    protected readonly EducationSystemDbContext _context;
     private readonly DbSet<TEntity> _dbSet;
 
     public GenericRepository(EducationSystemDbContext context)
@@ -23,6 +24,24 @@ public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEnt
     public async Task<List<TEntity>> GetRangeAsync()
     {
         return await _dbSet.AsNoTracking().ToListAsync();
+    }
+    
+    public async Task<int> CountAllAsync()
+    {
+        return await _dbSet.CountAsync();
+    }
+
+    public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
+    {
+        return _dbSet.Where(predicate);
+    }
+
+    public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate, BasePagination pagination)
+    {
+        return _dbSet.Where(predicate)
+            .Skip(pagination.Skip)
+            .Take(pagination.Take)
+            .ToList();
     }
 
     public async Task CreateAsync(TEntity entity)

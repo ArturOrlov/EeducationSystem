@@ -1,4 +1,6 @@
-﻿namespace EducationSystem.Interfaces.IRepositories;
+﻿using EducationSystem.Entities.Base;
+
+namespace EducationSystem.Interfaces.IRepositories;
 
 public interface IGenericRepository<TEntity> where TEntity : class
 {
@@ -14,6 +16,27 @@ public interface IGenericRepository<TEntity> where TEntity : class
     /// </summary>
     /// <returns></returns>
     Task<List<TEntity>> GetRangeAsync();
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns></returns>
+    Task<int> CountAllAsync();
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <returns></returns>
+    IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="predicate"></param>
+    /// <param name="pagination"></param>
+    /// <returns></returns>
+    IEnumerable<TEntity> Get(Func<TEntity, bool> predicate, BasePagination pagination);
     
     /// <summary>
     /// 

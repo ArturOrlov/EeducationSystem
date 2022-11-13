@@ -14,4 +14,9 @@ public static class HttpContentExtension
             Role = context.User.FindFirst(ClaimTypes.Role)?.Value,
         };
     }
+    
+    public static string GetUserAgent(this HttpContext context)
+    {
+        return context.Request.Headers["User-Agent"];
+    }
 }

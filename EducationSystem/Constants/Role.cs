@@ -22,11 +22,6 @@ public class Role
     /// </summary>
     public const string Student = "student";
 
-    /// <summary>
-    /// Родитель
-    /// </summary>
-    public const string Parent = "parent";
-
     // Костыль для более удобной передачи нескольких ролей для авторизации //
     
     /// <summary>
@@ -42,5 +37,5 @@ public class Role
     /// <summary>
     /// Все роли
     /// </summary>
-    public const string ForAll = $"{Admin},{HeadTeacher},{Teacher},{Student},{Parent}";
+    public const string ForAll = $"{Admin},{HeadTeacher},{Teacher},{Student}";
 }

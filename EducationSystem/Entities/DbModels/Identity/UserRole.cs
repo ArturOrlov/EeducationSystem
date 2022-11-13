@@ -1,16 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
-namespace EducationSystem.Entities.DbModels.Identity
+namespace EducationSystem.Entities.DbModels.Identity;
+
+public class UserRole : IdentityUserRole<int>
 {
-    public class UserRole : IdentityUserRole<int>
-    {
-        public DateTimeOffset CreatedAt { get; set; }
-        public DateTimeOffset UpdatedAt { get; set; }
-        
-        public int UserId { get; set; }
-        public User User { get; set; }
-
-        public int RoleId { get; set; }
-        public Role Role { get; set; }
-    }
+    /// <summary>
+    /// Дата создания сущности
+    /// </summary>
+    [Column("CreatedAt"), Comment("Дата создания сущности")]
+    public DateTime CreatedAt { get; set; }
+    
+    /// <summary>
+    /// Дата последнего обновления сущности
+    /// </summary>
+    [Column("UpdatedAt"), Comment("Дата последнего обновления сущности")]
+    public DateTime UpdatedAt { get; set; }
 }

@@ -30,10 +30,6 @@ public class DevController : ControllerBaseExtension
         Tags = new[] { "Dev" })]
     public async Task<IActionResult> PostSeedDb()
     {
-        var bootstrap = new Bootstrap.Bootstrap(_context, _userManager);
-
-        await bootstrap.SeedDb();
-
         return Ok();
     }
 }

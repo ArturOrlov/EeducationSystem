@@ -1,9 +1,9 @@
 ﻿using EducationSystem.Constants;
 using EducationSystem.Context;
-using EducationSystem.Entities.DbModels;
+using EducationSystem.Entities.DbModels.Dictionaries;
 using EducationSystem.Entities.DbModels.Identity;
+using EducationSystem.Interfaces.IRepositories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.VisualBasic;
 using Role = EducationSystem.Entities.DbModels.Identity.Role;
 
 namespace EducationSystem.Bootstrap;
@@ -12,18 +12,23 @@ public class Bootstrap
 {
     private readonly EducationSystemDbContext _context;
     private readonly UserManager<User> _userManager;
+    private readonly IApplicationSettingsRepository _applicationSettingsRepository;
 
     public Bootstrap(EducationSystemDbContext context,
-        UserManager<User> userManager)
+        UserManager<User> userManager,
+        IApplicationSettingsRepository applicationSettingsRepository)
     {
         _context = context;
         _userManager = userManager;
+        _applicationSettingsRepository = applicationSettingsRepository;
     }
 
     public async Task SeedDb()
     {
         await SeedRolesAsync();
         await SeedAdminAsync();
+        await SeedSettings();
+
         // await SeedSchoolClassAsync();
         // await SeedSubjectAsync();
     }
@@ -40,8 +45,7 @@ public class Bootstrap
             RoleSeedHelper(Constants.Role.Admin),
             RoleSeedHelper(Constants.Role.HeadTeacher),
             RoleSeedHelper(Constants.Role.Teacher),
-            RoleSeedHelper(Constants.Role.Student),
-            RoleSeedHelper(Constants.Role.Parent)
+            RoleSeedHelper(Constants.Role.Student)
         };
 
         await _context.AddRangeAsync(roles);
@@ -65,7 +69,7 @@ public class Bootstrap
             EmailConfirmed = true,
             PhoneNumberConfirmed = true,
             SecurityStamp = Guid.NewGuid().ToString("D"),
-            UpdatedAt = DateTimeOffset.Now
+            UpdatedAt = DateTime.Now
         };
 
         var result = await _userManager.CreateAsync(user, AdminDefaultSettings.Password);
@@ -73,6 +77,33 @@ public class Bootstrap
         if (result.Succeeded)
         {
             await _userManager.AddToRoleAsync(user, Constants.Role.Admin);
+        }
+    }
+
+    private async Task SeedSettings()
+    {
+        var settings = new List<ApplicationSettings>()
+        {
+            new(EducationSystemSettings.SMTP_CLIENT, "Адрес SMTP клиента", "smtp.gmail.com"),
+            new(EducationSystemSettings.SMTP_CLIENT_PORT, "Порт SMTP клиента", "587"),
+            new(EducationSystemSettings.EMAIL, "Электронная почта приложения", "educationSystem.sender@gmail.com"),
+            new(EducationSystemSettings.EMAIL_PASSWORD, "Пароль электронной почты", "123"),
+            new(EducationSystemSettings.JWT_TOKEN_HOURS, "Длительность действия JWT токена (часов)", "24"),
+            new(EducationSystemSettings.JWT_REFRESH_HOURS, "Длительность действия REFRESH токена (часов)", "168"),
+            new(EducationSystemSettings.VERIFICATION_TOKEN_LIFE, "Длительность кодов подтверждения (часов)", "3"),
+            new(EducationSystemSettings.WEBSITE_ADDRESS, "Адрес внешнего сайта", "192.168.0.2"),
+            new(EducationSystemSettings.WEBSITE_LOGIN, "Логин для подключения к серверу внешнего сайта", "username"),
+            new(EducationSystemSettings.WEBSITE_PASSWORD, "Пароль для подключения к серверу внешнего сайта", "mypass"),
+            new(EducationSystemSettings.WEBSITE_FTP_PORT, "Порт для FTP подключения к серверу внешнего сайта", "21"),
+            new(EducationSystemSettings.WEBSITE_SERVER_EXPORT_STATISTICS_ENABLE, "Включить/выключить FTP отправку статистики", "false"),
+        };
+
+        foreach (var setting in settings)
+        {
+            if (await _applicationSettingsRepository.GetByNameAsync(setting.Name) == null)
+            {
+                await _applicationSettingsRepository.CreateAsync(setting);
+            }
         }
     }
 
@@ -141,15 +172,9 @@ public class Bootstrap
         {
             Name = role,
             NormalizedName = role.ToUpper(),
-            ConcurrencyStamp = Convert.ToString(DateTimeOffset.Now.Ticks),
-            CreatedAt = DateTimeOffset.Now,
-            UpdatedAt = DateTimeOffset.Now
+            ConcurrencyStamp = Convert.ToString(DateTime.Now.Ticks),
+            CreatedAt = DateTime.Now,
+            UpdatedAt = DateTime.Now
         };
-    }
-
-    private DateTimeOffset ClassDateSeedHelper(int year)
-    {
-        return new DateTimeOffset(year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day, 0, 0, 0, DateTimeOffset.Now.Offset);
-        // return new DateTimeOffset(year, DateTimeOffset.Now.Month, DateTimeOffset.Now.Day);
     }
 }
