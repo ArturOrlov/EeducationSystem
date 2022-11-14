@@ -56,12 +56,12 @@ public interface IUserService
     /// <param name="userId"></param>
     /// <returns></returns>
     Task<BaseResponse<string>> DeleteByIdAsync(int userId);
-    
+
     /// <summary>
     /// 
     /// </summary>
     /// <param name="user"></param>
     /// <param name="claim"></param>
     /// <returns></returns>
-    Task<bool> AuthorizeClaims(User user, string claim);
+    Task<bool> AuthorizeClaimsAsync(User user, string claim);
 }

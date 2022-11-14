@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using EducationSystem.Context;
+﻿using EducationSystem.Context;
 using EducationSystem.Dto.User;
 using EducationSystem.Dto.UserInfo;
 using EducationSystem.Entities.Base;
@@ -276,7 +275,7 @@ public class UserService : IUserService
         return response;
     }
 
-    public async Task<bool> AuthorizeClaims(User user, string claim)
+    public async Task<bool> AuthorizeClaimsAsync(User user, string claim)
     {
         // IList<Claim> listClaims;
         //

@@ -26,7 +26,8 @@ public class UserRoleController : ControllerBaseExtension
         Summary = "Получить связь пользователь-роль по его id",
         Description = "Получить связь пользователь-роль по его id",
         OperationId = "UserRole.Get.ById",
-        Tags = new[] { "UserRole" })]
+        Tags = new[] { "UserRole" }
+    )]
     public async Task<IActionResult> GetById([FromRoute] int userRoleId)
     {
         var response = await _userRoleService.GetUserRoleByIdAsync(userRoleId);
@@ -40,7 +41,8 @@ public class UserRoleController : ControllerBaseExtension
         Summary = "Получить связь пользователь-роль по филтрам",
         Description = "Получить связь пользователь-роль по филтрам",
         OperationId = "UserRole.Get.List",
-        Tags = new[] { "UserRole" })]
+        Tags = new[] { "UserRole" }
+    )]
     public async Task<IActionResult> GetAll([FromQuery] BasePagination request)
     {
         var response = await _userRoleService.GetUserRoleByPaginationAsync(request);
@@ -54,7 +56,8 @@ public class UserRoleController : ControllerBaseExtension
         Summary = "Создать связь пользователь-роль",
         Description = "Создать связь пользователь-роль",
         OperationId = "UserRole.Create",
-        Tags = new[] { "UserRole" })]
+        Tags = new[] { "UserRole" }
+    )]
     public async Task<IActionResult> Create([FromBody] CreateUserRoleDto request)
     {
         var response = await _userRoleService.CreateUserRoleAsync(request);
@@ -68,7 +71,8 @@ public class UserRoleController : ControllerBaseExtension
         Summary = "Обновить связь пользователь-роль по его id",
         Description = "Обновить связь пользователь-роль по его id",
         OperationId = "UserRole.Update.ById",
-        Tags = new[] { "UserRole" })]
+        Tags = new[] { "UserRole" }
+    )]
     public async Task<IActionResult> Update([FromRoute] int userRoleId, [FromBody] UpdateUserRoleDto request)
     {
         var response = await _userRoleService.UpdateUserRoleByIdAsync(userRoleId, request);
@@ -82,7 +86,8 @@ public class UserRoleController : ControllerBaseExtension
         Summary = "Удалить связь пользователь-роль по его id",
         Description = "Удалить связь пользователь-роль по его id",
         OperationId = "UserRole.Delete.ById",
-        Tags = new[] { "UserRole" })]
+        Tags = new[] { "UserRole" }
+    )]
     public async Task<IActionResult> Delete([FromRoute] int userRoleId)
     {
         var response = await _userRoleService.DeleteUserRoleByIdAsync(userRoleId);

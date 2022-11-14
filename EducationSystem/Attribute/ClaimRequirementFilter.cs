@@ -31,7 +31,7 @@ public class ClaimRequirementFilter : Exception, IAsyncAuthorizationFilter
                 
             var currentUser = await _userService.FindUser(user);
         
-            if (!await _userService.AuthorizeClaims(currentUser.Data, _claim.Type))
+            if (!await _userService.AuthorizeClaimsAsync(currentUser.Data, _claim.Type))
             {
                 context.Result = new ObjectResult(new BaseResponse<string>(true, "пошёл нахуй"))
                 {

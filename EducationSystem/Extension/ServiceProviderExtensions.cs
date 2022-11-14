@@ -31,14 +31,11 @@ public static class ServiceProviderExtensions
         services.AddTransient<ISettingService, SettingService>();
         services.AddTransient<IDictionarySettingService, SettingService>();
         services.AddTransient<IVerificationTokenService, VerificationTokenService>();
+        services.AddTransient<IClaimService, ClaimService>();
+        services.AddTransient<IUserClaimService, UserClaimService>();
+        services.AddTransient<IRoleClaimService, RoleClaimService>();
 
-        // services.AddTransient<IUserClassService, UserClassService>();
-        //
-        // services.AddTransient<ICabinetService, CabinetService>();
         // services.AddTransient<ISubjectService, SubjectService>();
-        // services.AddTransient<IHomeworkService, HomeworkService>();
-        // services.AddTransient<ITimetableService, TimetableService>();
-        // services.AddTransient<ISchoolClassService, SchoolClassService>();
         // services.AddTransient<IPerformanceRatingService, PerformanceRatingService>();
     }
     
@@ -57,14 +54,10 @@ public static class ServiceProviderExtensions
         services.AddTransient<IVerificationTokenRepository, VerificationTokenRepository>();
         services.AddTransient<IDeviceRepository, DeviceRepository>();
         services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
+        services.AddTransient<IUserClaimRepository, UserClaimRepository>();
+        services.AddTransient<IRoleClaimRepository, RoleClaimRepository>();
         
-        // services.AddTransient<IUserClassRepository, UserClassRepository>();
-        //
-        // services.AddTransient<ICabinetRepository, CabinetRepository>();
         // services.AddTransient<ISubjectRepository, SubjectRepository>();
-        // services.AddTransient<IHomeworkRepository, HomeworkRepository>();
-        // services.AddTransient<ITimetableRepository, TimetableRepository>();
-        // services.AddTransient<ISchoolClassRepository, SchoolClassRepository>();
         // services.AddTransient<IPerformanceRatingRepository, PerformanceRatingRepository>();
     }
 }

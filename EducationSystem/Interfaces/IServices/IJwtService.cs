@@ -1,7 +1,4 @@
-﻿using EducationSystem.Dto;
-using EducationSystem.Entities.DbModels.Identity;
-
-namespace EducationSystem.Interfaces.IServices;
+﻿namespace EducationSystem.Interfaces.IServices;
 
 public interface IJwtService
 {

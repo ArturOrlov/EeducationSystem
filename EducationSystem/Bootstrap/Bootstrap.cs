@@ -42,10 +42,10 @@ public class Bootstrap
 
         var roles = new List<Role>()
         {
-            RoleSeedHelper(Constants.Role.Admin),
-            RoleSeedHelper(Constants.Role.HeadTeacher),
-            RoleSeedHelper(Constants.Role.Teacher),
-            RoleSeedHelper(Constants.Role.Student)
+            RoleSeedHelper(Constants.Roles.Admin),
+            RoleSeedHelper(Constants.Roles.HeadTeacher),
+            RoleSeedHelper(Constants.Roles.Teacher),
+            RoleSeedHelper(Constants.Roles.Student)
         };
 
         await _context.AddRangeAsync(roles);
@@ -76,7 +76,7 @@ public class Bootstrap
 
         if (result.Succeeded)
         {
-            await _userManager.AddToRoleAsync(user, Constants.Role.Admin);
+            await _userManager.AddToRoleAsync(user, Constants.Roles.Admin);
         }
     }
 

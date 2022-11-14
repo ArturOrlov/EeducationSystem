@@ -1,13 +1,6 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.Text;
-using EducationSystem.Constants;
-using EducationSystem.Dto;
-using EducationSystem.Entities.DbModels.Identity;
+﻿using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IServices;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.IdentityModel.Tokens;
 
 namespace EducationSystem.Services;
 

@@ -27,7 +27,8 @@ public class DevController : ControllerBaseExtension
         Summary = "Заполнить дб данными",
         Description = "Заполнить дб данными",
         OperationId = "Dev.Post.Db",
-        Tags = new[] { "Dev" })]
+        Tags = new[] { "Dev" }
+)]
     public async Task<IActionResult> PostSeedDb()
     {
         return Ok();

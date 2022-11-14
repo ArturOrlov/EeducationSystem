@@ -2,13 +2,10 @@
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using EducationSystem.Constants;
 using EducationSystem.Dto;
-using EducationSystem.Entities.Base;
 using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IRepositories;
 using EducationSystem.Interfaces.IServices;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -33,8 +30,8 @@ public class AuthenticateController : ControllerBase
         UserManager<User> userManager,
         RoleManager<Role> roleManager,
         IConfiguration configuration,
-        IUserService userService, 
-        IAccountService accountService, 
+        IUserService userService,
+        IAccountService accountService,
         ISettingService settingService,
         IRefreshTokenRepository refreshTokenRepository)
     {
@@ -53,41 +50,42 @@ public class AuthenticateController : ControllerBase
         Summary = "Авторизация пользователя",
         Description = "Авторизация пользователя",
         OperationId = "Account.Login",
-        Tags = new[] { "Account" })]
+        Tags = new[] { "Account" }
+    )]
     public async Task<IActionResult> Login([FromBody] LoginDto model)
     {
         var user = await _userService.GetByLoginAsync(model.Login, model.Password);
-        
+
         if (user.IsError)
         {
             return BadRequest(user.Description);
         }
-        
+
         var userRoles = await _userManager.GetRolesAsync(user.Data);
-        
+
         var authClaims = new List<Claim>
         {
             new(ClaimTypes.Name, user.Data.UserName),
             new(ClaimTypes.NameIdentifier, user.Data.Id.ToString()),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
-        
+
         foreach (var userRole in userRoles)
         {
             authClaims.Add(new Claim(ClaimTypes.Role, userRole));
         }
-        
+
         var token = CreateToken(authClaims);
         var refreshToken = GenerateRefreshToken();
-        
+
         _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
-        
+
         // user.Data.RefreshToken = refreshToken;
         // user.Data.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
-        
+
         user.Data.UpdatedAt = DateTime.Now;
         await _userManager.UpdateAsync(user.Data);
-        
+
         return Ok(new
         {
             Token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -95,7 +93,7 @@ public class AuthenticateController : ControllerBase
             Expiration = token.ValidTo
         });
     }
-    
+
     // [HttpPost]
     // [Route("refresh-token")]
     // public async Task<IActionResult> RefreshToken(BaseAuth tokenModel)

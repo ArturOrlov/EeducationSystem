@@ -20,7 +20,7 @@ public class SettingService : IDictionarySettingService, ISettingService
         _mapper = mapper;
     }
 
-    public async Task<BaseResponse<ApplicationSettingResponseDto>> AddSetting(ApplicationSettingDto settingDto)
+    public async Task<BaseResponse<ApplicationSettingResponseDto>> AddSettingAsync(ApplicationSettingDto settingDto)
     {
         var result = new BaseResponse<ApplicationSettingResponseDto>(null);
 
@@ -46,7 +46,7 @@ public class SettingService : IDictionarySettingService, ISettingService
         return result;
     }
 
-    public async Task<BaseResponse<ApplicationSettingResponseDto>> UpdateSetting(int settingId, ApplicationSettingDto settingDto)
+    public async Task<BaseResponse<ApplicationSettingResponseDto>> UpdateSettingAsync(int settingId, ApplicationSettingDto settingDto)
     {
         var result = new BaseResponse<ApplicationSettingResponseDto>(null);
             
@@ -77,7 +77,7 @@ public class SettingService : IDictionarySettingService, ISettingService
         return result;
     }
 
-    public async Task<BaseResponse<ApplicationSettingResponseDto>> GetSetting(int settingId)
+    public async Task<BaseResponse<ApplicationSettingResponseDto>> GetSettingAsync(int settingId)
     {
         var result = new BaseResponse<ApplicationSettingResponseDto>(null);
 
@@ -94,7 +94,7 @@ public class SettingService : IDictionarySettingService, ISettingService
         return result;
     }
 
-    public async Task<BaseResponse<BasePaginationResponse<ApplicationSettingResponseDto>>> GetPagedSettings(BasePagination pagination)
+    public async Task<BaseResponse<BasePaginationResponse<ApplicationSettingResponseDto>>> GetPagedSettingsAsync(BasePagination pagination)
     {
         var result = new BaseResponse<BasePaginationResponse<ApplicationSettingResponseDto>>();
 
@@ -105,7 +105,7 @@ public class SettingService : IDictionarySettingService, ISettingService
         return result;
     }
 
-    public async Task<BaseResponse<string>> DeleteSetting(int settingId)
+    public async Task<BaseResponse<string>> DeleteSettingAsync(int settingId)
     {
         var result = new BaseResponse<string>(null);
 

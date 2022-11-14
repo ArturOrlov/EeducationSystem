@@ -5,9 +5,39 @@ namespace EducationSystem.Interfaces.IServices;
 
 public interface IDictionarySettingService
 {
-    Task<BaseResponse<ApplicationSettingResponseDto>> AddSetting(ApplicationSettingDto settingDto);
-    Task<BaseResponse<ApplicationSettingResponseDto>> UpdateSetting(int settingId, ApplicationSettingDto settingDto);
-    Task<BaseResponse<ApplicationSettingResponseDto>> GetSetting(int settingId);
-    Task<BaseResponse<BasePaginationResponse<ApplicationSettingResponseDto>>> GetPagedSettings(BasePagination pagination);
-    Task<BaseResponse<string>> DeleteSetting(int settingId);
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="settingDto"></param>
+    /// <returns></returns>
+    Task<BaseResponse<ApplicationSettingResponseDto>> AddSettingAsync(ApplicationSettingDto settingDto);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="settingId"></param>
+    /// <param name="settingDto"></param>
+    /// <returns></returns>
+    Task<BaseResponse<ApplicationSettingResponseDto>> UpdateSettingAsync(int settingId, ApplicationSettingDto settingDto);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="settingId"></param>
+    /// <returns></returns>
+    Task<BaseResponse<ApplicationSettingResponseDto>> GetSettingAsync(int settingId);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="pagination"></param>
+    /// <returns></returns>
+    Task<BaseResponse<BasePaginationResponse<ApplicationSettingResponseDto>>> GetPagedSettingsAsync(BasePagination pagination);
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="settingId"></param>
+    /// <returns></returns>
+    Task<BaseResponse<string>> DeleteSettingAsync(int settingId);
 }

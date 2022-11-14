@@ -1,6 +1,6 @@
 ﻿namespace EducationSystem.Constants;
 
-public class Role
+public class Roles
 {
     /// <summary>
     /// Администратор

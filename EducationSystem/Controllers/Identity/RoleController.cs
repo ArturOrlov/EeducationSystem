@@ -26,7 +26,8 @@ public class RoleController : ControllerBaseExtension
         Summary = "Получить роль по его id",
         Description = "Получить роль по его id",
         OperationId = "Role.Get.ById",
-        Tags = new[] { "Role" })]
+        Tags = new[] { "Role" }
+    )]
     public async Task<IActionResult> GetById([FromRoute] int roleId)
     {
         var response = await _roleService.GetRoleByIdAsync(roleId);
@@ -40,7 +41,8 @@ public class RoleController : ControllerBaseExtension
         Summary = "Получить роли по филтрам",
         Description = "Получить роли по филтрам",
         OperationId = "Role.Get.List",
-        Tags = new[] { "Role" })]
+        Tags = new[] { "Role" }
+    )]
     public async Task<IActionResult> GetAll([FromQuery] BasePagination request)
     {
         var response = await _roleService.GetRoleByPaginationAsync(request);
@@ -54,7 +56,8 @@ public class RoleController : ControllerBaseExtension
         Summary = "Создать роль",
         Description = "Создать роль",
         OperationId = "Role.Create",
-        Tags = new[] { "Role" })]
+        Tags = new[] { "Role" }
+    )]
     public async Task<IActionResult> Create([FromBody] CreateRoleDto request)
     {
         var response = await _roleService.CreateRoleAsync(request);
@@ -68,7 +71,8 @@ public class RoleController : ControllerBaseExtension
         Summary = "Обновить роль по его id",
         Description = "Обновить роль по его id",
         OperationId = "Role.Update.ById",
-        Tags = new[] { "Role" })]
+        Tags = new[] { "Role" }
+    )]
     public async Task<IActionResult> Update([FromRoute] int roleId, [FromBody] UpdateRoleDto request)
     {
         var response = await _roleService.UpdateRoleByIdAsync(roleId, request);
@@ -82,7 +86,8 @@ public class RoleController : ControllerBaseExtension
         Summary = "Удалить роль по его id",
         Description = "Удалить роль по его id",
         OperationId = "Role.Delete.ById",
-        Tags = new[] { "Role" })]
+        Tags = new[] { "Role" }
+    )]
     public async Task<IActionResult> Delete([FromRoute] int roleId)
     {
         var response = await _roleService.DeleteRoleByIdAsync(roleId);
