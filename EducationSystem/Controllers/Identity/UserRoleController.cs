@@ -2,6 +2,7 @@
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices;
+using EducationSystem.Interfaces.IServices.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -38,8 +39,8 @@ public class UserRoleController : ControllerBaseExtension
     [HttpGet]
     [Route("")]
     [SwaggerOperation(
-        Summary = "Получить связь пользователь-роль по филтрам",
-        Description = "Получить связь пользователь-роль по филтрам",
+        Summary = "Получить связь пользователь-роль по фильтрам",
+        Description = "Получить связь пользователь-роль по фильтрам",
         OperationId = "UserRole.Get.List",
         Tags = new[] { "UserRole" }
     )]

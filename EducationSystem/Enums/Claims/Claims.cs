@@ -1,4 +1,4 @@
-﻿namespace ar_widget.Enums.Claims;
+﻿namespace EducationSystem.Enums.Claims;
 
 public class Claims
 {

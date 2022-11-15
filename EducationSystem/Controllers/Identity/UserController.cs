@@ -1,6 +1,7 @@
 ﻿using EducationSystem.Dto.User;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices;
+using EducationSystem.Interfaces.IServices.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -52,8 +53,8 @@ public class UserController : ControllerBaseExtension
     [HttpGet]
     [Route("")]
     [SwaggerOperation(
-        Summary = "Получить пользователей по филтрам",
-        Description = "Получить пользователей по филтрам",
+        Summary = "Получить пользователей по фильтрам",
+        Description = "Получить пользователей по фильтрам",
         OperationId = "User.Get.List",
         Tags = new[] { "User" }
     )]

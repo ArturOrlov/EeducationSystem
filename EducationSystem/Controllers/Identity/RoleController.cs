@@ -2,6 +2,7 @@
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices;
+using EducationSystem.Interfaces.IServices.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
@@ -38,8 +39,8 @@ public class RoleController : ControllerBaseExtension
     [HttpGet]
     [Route("")]
     [SwaggerOperation(
-        Summary = "Получить роли по филтрам",
-        Description = "Получить роли по филтрам",
+        Summary = "Получить роли по фильтрам",
+        Description = "Получить роли по фильтрам",
         OperationId = "Role.Get.List",
         Tags = new[] { "Role" }
     )]
