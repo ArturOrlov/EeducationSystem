@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
+using EducationSystem.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystem.Entities.DbModels.Material.Lecture;
 
-public class Lecture
+/// <summary>
+/// Материал - лекция
+/// </summary>
+public class Lecture : BaseEntity<int>
 {
     /// <summary>
     /// Уникальный идентификатор курса

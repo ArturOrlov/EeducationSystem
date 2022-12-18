@@ -1,7 +1,6 @@
 ﻿using EducationSystem.Dto.Lecture;
 using EducationSystem.Entities.Base;
 using EducationSystem.Interfaces.IRepositories.Material.Lecture;
-using EducationSystem.Interfaces.IServices.Material;
 using EducationSystem.Interfaces.IServices.Material.Lecture;
 
 namespace EducationSystem.Services.Material.Lecture;

@@ -1,5 +1,4 @@
 ﻿using EducationSystem.Context;
-using EducationSystem.Entities.DbModels.Material.Lecture;
 using EducationSystem.Interfaces.IRepositories.Material.Lecture;
 
 namespace EducationSystem.Repositories.Material.Lecture;

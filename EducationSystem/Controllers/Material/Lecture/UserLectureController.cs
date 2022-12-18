@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace EducationSystem.Controllers.Material.UserLecture;
+namespace EducationSystem.Controllers.Material.Lecture;
 
 [Authorize]
 [ApiController]
@@ -23,8 +23,8 @@ public class UserLectureController : ControllerBaseExtension
     [HttpGet]
     [Route("{lectureId:int}")]
     [SwaggerOperation(
-        Summary = "Получить запись пользовватель-лекция по его id",
-        Description = "Получить запись пользовватель-лекция по его id",
+        Summary = "Получить запись пользователь-лекция по его id",
+        Description = "Получить запись пользователь-лекция по его id",
         OperationId = "UserLecture.Get.ById",
         Tags = new[] { "UserLecture" }
     )]
@@ -38,8 +38,8 @@ public class UserLectureController : ControllerBaseExtension
     [HttpGet]
     [Route("")]
     [SwaggerOperation(
-        Summary = "Получить записи пользовватель-лекция по фильтрам",
-        Description = "Получить записи пользовватель-лекция по фильтрам",
+        Summary = "Получить записи пользователь-лекция по фильтрам",
+        Description = "Получить записи пользователь-лекция по фильтрам",
         OperationId = "UserLecture.Get.List",
         Tags = new[] { "UserLecture" }
     )]
@@ -53,8 +53,8 @@ public class UserLectureController : ControllerBaseExtension
     [HttpPost]
     [Route("")]
     [SwaggerOperation(
-        Summary = "Создать запись пользовватель-лекция",
-        Description = "Создать запись пользовватель-лекция",
+        Summary = "Создать запись пользователь-лекция",
+        Description = "Создать запись пользователь-лекция",
         OperationId = "UserLecture.Create",
         Tags = new[] { "UserLecture" }
     )]
@@ -68,8 +68,8 @@ public class UserLectureController : ControllerBaseExtension
     [HttpPut]
     [Route("{lectureId:int}")]
     [SwaggerOperation(
-        Summary = "Обновить запись пользовватель-лекция по его id",
-        Description = "Обновить запись пользовватель-лекция по его id",
+        Summary = "Обновить запись пользователь-лекция по его id",
+        Description = "Обновить запись пользователь-лекция по его id",
         OperationId = "UserLecture.Update.ById",
         Tags = new[] { "UserLecture" }
     )]
@@ -83,8 +83,8 @@ public class UserLectureController : ControllerBaseExtension
     [HttpDelete]
     [Route("{lectureId:int}")]
     [SwaggerOperation(
-        Summary = "Удалить запись пользовватель-лекция по его id",
-        Description = "Удалить запись пользовватель-лекция по его id",
+        Summary = "Удалить запись пользователь-лекция по его id",
+        Description = "Удалить запись пользователь-лекция по его id",
         OperationId = "UserLecture.Delete.ById",
         Tags = new[] { "UserLecture" }
     )]

@@ -2,28 +2,17 @@
 using EducationSystem.Entities.Base;
 using EducationSystem.Interfaces.IRepositories.Material.Test;
 using EducationSystem.Interfaces.IServices.Material;
+using EducationSystem.Interfaces.IServices.Material.Test;
 
-namespace EducationSystem.Services.Material;
+namespace EducationSystem.Services.Material.Test;
 
 public class TestService : ITestService
 {
-    private readonly ITestAnswerRepository _testAnswerRepository;
-    private readonly ITestHeadRepository _testHeadRepository;
-    private readonly ITestQuestionRepository _testQuestionRepository;
-    private readonly IUserTestAnswerRepository _userTestAnswerRepository;
-    private readonly IUserTestQuestionRepository _userTestQuestionRepository;
+    private readonly ITestRepository _testRepository;
 
-    public TestService(ITestAnswerRepository testAnswerRepository,
-        ITestHeadRepository testHeadRepository,
-        ITestQuestionRepository testQuestionRepository,
-        IUserTestAnswerRepository userTestAnswerRepository, 
-        IUserTestQuestionRepository userTestQuestionRepository)
+    public TestService(ITestRepository testRepository)
     {
-        _testAnswerRepository = testAnswerRepository;
-        _testHeadRepository = testHeadRepository;
-        _testQuestionRepository = testQuestionRepository;
-        _userTestAnswerRepository = userTestAnswerRepository;
-        _userTestQuestionRepository = userTestQuestionRepository;
+        _testRepository = testRepository;
     }
 
     public async Task<BaseResponse<GetTestDto>> GetTestByIdAsync(int testId)

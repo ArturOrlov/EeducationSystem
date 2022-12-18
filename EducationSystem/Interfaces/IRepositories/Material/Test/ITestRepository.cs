@@ -1,6 +1,6 @@
 ﻿namespace EducationSystem.Interfaces.IRepositories.Material.Test;
 
-public interface IUserTestAnswerRepository
+public interface ITestRepository
 {
     
 }

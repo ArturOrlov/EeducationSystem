@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystem.Entities.DbModels.Identity;
 
+/// <summary>
+/// 
+/// </summary>
 public class RefreshToken : BaseEntity<int>
 {
     /// <summary>

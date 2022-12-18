@@ -2,6 +2,9 @@
 
 namespace EducationSystem.Entities.DbModels.Dictionaries;
 
+/// <summary>
+/// 
+/// </summary>
 public class ApplicationSettings : BaseEntity<int>
 {
     public ApplicationSettings(string name, string alias, string value)
@@ -9,11 +12,6 @@ public class ApplicationSettings : BaseEntity<int>
         Name = name;
         Alias = alias;
         Value = value;
-    }
-
-    public ApplicationSettings()
-    {
-            
     }
 
     public string Name { get; set; }

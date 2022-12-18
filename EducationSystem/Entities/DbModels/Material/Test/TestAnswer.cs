@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Material.Test;
 
 /// <summary>
-/// Тест - голова теста
+/// Отеты для вопросов теста
 /// </summary>
 public class TestAnswer : BaseEntity<int>
 {
     /// <summary>
-    /// Уникальный идентификатор вопроса / к какому вопросу относится этот ответ
+    /// Уникальный идентификатор вопроса теста
     /// </summary>
-    [Column("CourseId"), Comment("Уникальный идентификатор курса")]
+    [Column("TestQuestionId"), Comment("Уникальный идентификатор вопроса теста")]
     public int TestQuestionId { get; set; }
     public TestQuestion TestQuestion { get; set; }
     

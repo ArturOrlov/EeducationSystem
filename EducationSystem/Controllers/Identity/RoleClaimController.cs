@@ -1,5 +1,4 @@
 using EducationSystem.Extension;
-using EducationSystem.Interfaces.IServices;
 using EducationSystem.Interfaces.IServices.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -5,11 +5,11 @@ using EducationSystem.Interfaces.IServices.Material.Lecture;
 
 namespace EducationSystem.Services.Material.Lecture;
 
-public class UserLectureMaterial : IUserLectureService
+public class UserLectureService : IUserLectureService
 {
     private readonly IUserLectureRepository _userLectureRepository;
 
-    public UserLectureMaterial(IUserLectureRepository userLectureRepository)
+    public UserLectureService(IUserLectureRepository userLectureRepository)
     {
         _userLectureRepository = userLectureRepository;
     }

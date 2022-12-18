@@ -4,9 +4,9 @@ using EducationSystem.Interfaces.IRepositories.Material.Test;
 
 namespace EducationSystem.Repositories.Material.Test;
 
-public class UserTestAnswerRepository : GenericRepository<UserTestAnswer>, IUserTestAnswerRepository
+public class UserTestResultRepository : GenericRepository<UserTestResult>, IUserTestResultRepository
 {
-    public UserTestAnswerRepository(EducationSystemDbContext context) : base(context)
+    public UserTestResultRepository(EducationSystemDbContext context) : base(context)
     {
     }
 }

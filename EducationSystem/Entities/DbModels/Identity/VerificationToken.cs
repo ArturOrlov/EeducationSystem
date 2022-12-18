@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystem.Entities.DbModels.Identity;
 
+/// <summary>
+/// 
+/// </summary>
 public class VerificationToken : BaseEntity<int>
 {
     public VerificationToken(string token, string data)

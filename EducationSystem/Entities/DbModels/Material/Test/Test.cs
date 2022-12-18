@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Material.Test;
 
 /// <summary>
-/// Тест - голова теста
+/// Тест
 /// </summary>
-public class TestHead : BaseEntity<int>
+public class Test : BaseEntity<int>
 {
     /// <summary>
     /// Название теста

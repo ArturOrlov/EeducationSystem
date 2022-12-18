@@ -1,7 +1,7 @@
 ﻿using EducationSystem.Dto.Test;
 using EducationSystem.Entities.Base;
 
-namespace EducationSystem.Interfaces.IServices.Material;
+namespace EducationSystem.Interfaces.IServices.Material.Test;
 
 public interface ITestService
 {

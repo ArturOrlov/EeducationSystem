@@ -29,6 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Dto\Identity" />
       <Folder Include="Enums" />
       <Folder Include="Migrations" />
     </ItemGroup>

@@ -6,7 +6,7 @@ namespace EducationSystem.Entities.Base;
 public abstract class BaseEntity<T>
 {
     /// <summary>
-    /// Дата создания сущности
+    /// Уникальный идентификатор сущности
     /// </summary>
     [Column("Id"), Comment("Уникальный идентификатор сущности")]
     public T Id { get; set; }
@@ -23,4 +23,3 @@ public abstract class BaseEntity<T>
     [Column("UpdatedAt"), Comment("Дата последнего обновления сущности")]
     public DateTime UpdatedAt { get; set; }
 }
-

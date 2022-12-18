@@ -3,12 +3,12 @@ using EducationSystem.Entities.Base;
 using EducationSystem.Entities.DbModels.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace EducationSystem.Entities.DbModels.Material.Test;
+namespace EducationSystem.Entities.DbModels.Material.LaboratoryWork;
 
 /// <summary>
 /// 
 /// </summary>
-public class UserTestQuestion : BaseEntity<int>
+public class UserLaboratoryWork : BaseEntity<int>
 {
     /// <summary>
     /// Уникальный идентификатор пользователя
@@ -18,15 +18,15 @@ public class UserTestQuestion : BaseEntity<int>
     public User User { get; set; }
     
     /// <summary>
-    /// 
+    /// Уникальный идентификатор леции
     /// </summary>
-    [Column("UserId"), Comment("Уникальный идентификатор курса")]
-    public int TestQuestionId { get; set; }
-    public TestQuestion TestQuestion { get; set; }
+    [Column("LaboratoryWorkId"), Comment("Уникальный идентификатор леции")]
+    public int LaboratoryWorkId { get; set; }
+    public LaboratoryWork LaboratoryWork { get; set; }
     
     /// <summary>
     /// Оценка
     /// </summary>
-    [Column("Value"), Comment("Оценка пользователя по курсу")]
+    [Column("Value"), Comment("todo")]
     public int? Value { get; set; }
 }
