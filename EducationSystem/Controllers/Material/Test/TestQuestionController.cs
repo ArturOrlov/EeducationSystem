@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Test;
+﻿using EducationSystem.Dto.Material.Test.Question;
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices.Material.Test;
@@ -58,7 +58,7 @@ public class TestQuestionController : ControllerBaseExtension
         OperationId = "TestQuestion.Create",
         Tags = new[] { "Test" }
     )]
-    public async Task<IActionResult> Create([FromBody] CreateTestQuestionDto request)
+    public async Task<IActionResult> Create([FromForm] CreateTestQuestionDto request)
     {
         var response = await _testQuestionService.CreateTestQuestionAsync(request);
 

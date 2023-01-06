@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystem.Entities.DbModels.Identity;
 
+/// <summary>
+/// Дополнительные данные пользователя
+/// </summary>
 public class UserInfo : BaseEntity<int>
 {
     /// <summary>

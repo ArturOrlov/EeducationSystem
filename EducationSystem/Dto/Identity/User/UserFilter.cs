@@ -1,6 +1,6 @@
 ﻿using EducationSystem.Entities.Base;
 
-namespace EducationSystem.Dto.User;
+namespace EducationSystem.Dto.Identity.User;
 
 public class UserFilter : BasePagination
 {

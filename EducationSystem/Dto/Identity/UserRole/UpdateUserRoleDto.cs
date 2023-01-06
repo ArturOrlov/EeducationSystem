@@ -1,4 +1,4 @@
-﻿namespace EducationSystem.Dto.UserRole;
+﻿namespace EducationSystem.Dto.Identity.UserRole;
 
 public class UpdateUserRoleDto
 {

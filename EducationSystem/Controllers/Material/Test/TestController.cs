@@ -1,7 +1,6 @@
-﻿using EducationSystem.Dto.Test;
+﻿using EducationSystem.Dto.Material.Test;
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
-using EducationSystem.Interfaces.IServices.Material;
 using EducationSystem.Interfaces.IServices.Material.Test;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

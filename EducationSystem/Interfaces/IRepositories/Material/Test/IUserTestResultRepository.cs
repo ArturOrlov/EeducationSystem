@@ -1,6 +1,7 @@
-﻿namespace EducationSystem.Interfaces.IRepositories.Material.Test;
+﻿using EducationSystem.Entities.DbModels.Material.Test;
 
-public interface IUserTestResultRepository
+namespace EducationSystem.Interfaces.IRepositories.Material.Test;
+
+public interface IUserTestResultRepository : IGenericRepository<UserTestResult>
 {
-    
 }

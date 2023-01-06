@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Material.Lecture;
 
 /// <summary>
-/// 
+/// Результат прохождения лекции пользователя
 /// </summary>
 public class UserLecture : BaseEntity<int>
 {
@@ -25,8 +25,8 @@ public class UserLecture : BaseEntity<int>
     public Lecture Lecture { get; set; }
     
     /// <summary>
-    /// Статус доступа к курсу  todo
+    /// Статус прохождения лекции
     /// </summary>
-    [Column("IsRead"), Comment("todo")]
+    [Column("IsRead"), Comment("Статус прохождения лекции")]
     public bool IsRead { get; set; }
 }

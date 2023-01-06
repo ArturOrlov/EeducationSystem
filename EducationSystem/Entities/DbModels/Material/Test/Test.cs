@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Material.Test;
 
 /// <summary>
-/// Тест
+/// Материал - Тест
 /// </summary>
 public class Test : BaseEntity<int>
 {
@@ -14,6 +14,12 @@ public class Test : BaseEntity<int>
     /// </summary>
     [Column("Name"), Comment("Название теста")]
     public string Name { get; set; }
+    
+    /// <summary>
+    /// Описание теста
+    /// </summary>
+    [Column("Description"), Comment("Описание теста")]
+    public string Description { get; set; }
     
     /// <summary>
     /// Уникальный идентификатор курса
@@ -27,10 +33,4 @@ public class Test : BaseEntity<int>
     /// </summary>
     [Column("IsActive"), Comment("Статус доступа к тесту")]
     public bool IsActive { get; set; }
-    
-    /// <summary>
-    /// Время на один ответ
-    /// </summary>
-    [Column("TimeForQuestion"), Comment("Время на один ответ")]
-    public TimeSpan TimeForQuestion { get; set; }
 }

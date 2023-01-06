@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Identity;
 
 /// <summary>
-/// 
+/// Роль пользователя
 /// </summary>
 public class UserRole : IdentityUserRole<int>
 {

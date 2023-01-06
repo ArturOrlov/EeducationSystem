@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Lecture;
+﻿using EducationSystem.Dto.Material.Lecture;
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices.Material.Lecture;

@@ -1,7 +1,7 @@
 ﻿using EducationSystem.Dto;
-using EducationSystem.Dto.Role;
-using EducationSystem.Dto.User;
-using EducationSystem.Dto.UserInfo;
+using EducationSystem.Dto.Identity.Role;
+using EducationSystem.Dto.Identity.User;
+using EducationSystem.Dto.Identity.UserInfo;
 using EducationSystem.Entities.DbModels.Dictionaries;
 using EducationSystem.Entities.DbModels.Identity;
 using Mapster;

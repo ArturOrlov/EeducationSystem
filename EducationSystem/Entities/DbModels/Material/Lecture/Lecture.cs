@@ -5,10 +5,16 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Material.Lecture;
 
 /// <summary>
-/// Материал - лекция
+/// Материал - Лекция
 /// </summary>
 public class Lecture : BaseEntity<int>
 {
+    /// <summary>
+    /// Название лекции
+    /// </summary>
+    [Column("Name"), Comment("Название лекции")]
+    public string Name { get; set; }
+    
     /// <summary>
     /// Уникальный идентификатор курса
     /// </summary>
@@ -17,10 +23,10 @@ public class Lecture : BaseEntity<int>
     public Course Course { get; set; }
     
     /// <summary>
-    /// TODO
+    /// Ссылка на материал лекции
     /// </summary>
-    [Column("Material"), Comment("TODO")]
-    public string Material { get; set; }
+    [Column("MaterialUrl"), Comment("Ссылка на материал лекции")]
+    public string MaterialUrl { get; set; }
     
     /// <summary>
     /// Статус доступа к курсу

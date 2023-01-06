@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.UserInfo;
+﻿using EducationSystem.Dto.Identity.UserInfo;
 using EducationSystem.Entities.Base;
 using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IRepositories.Identity;
@@ -18,8 +18,8 @@ public class UserInfoService : IUserInfoService
         IMapper mapper)
     {
         _userInfoRepository = userInfoRepository;
-        _mapper = mapper;
         _userRepository = userRepository;
+        _mapper = mapper;
     }
 
     public async Task<BaseResponse<GetUserInfoDto>> GetByIdAsync(int userId)
@@ -31,7 +31,7 @@ public class UserInfoService : IUserInfoService
         if (userInfo == null)
         {
             response.IsError = true;
-            response.Description = "Неверный логин или пароль";
+            response.Description = $"Информация о пользователе с id - {userId} не найдена";
             return response;
         }
 
@@ -50,7 +50,7 @@ public class UserInfoService : IUserInfoService
         if (user == null)
         {
             response.IsError = true;
-            response.Description = "Неверный логин или пароль";
+            response.Description = $"Информация о пользователе с id - {userId} не найдена";
             return response;
         }
 
@@ -73,7 +73,7 @@ public class UserInfoService : IUserInfoService
         if (user == null)
         {
             response.IsError = true;
-            response.Description = "Неверный логин или пароль";
+            response.Description = $"Информация о пользователе с id - {userId} не найдена";
             return response;
         }
         

@@ -1,13 +1,11 @@
-﻿using EducationSystem.Context;
-using EducationSystem.Dto.User;
-using EducationSystem.Dto.UserInfo;
+﻿using EducationSystem.Dto.Identity.User;
+using EducationSystem.Dto.Identity.UserInfo;
 using EducationSystem.Entities.Base;
 using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IRepositories.Identity;
 using EducationSystem.Interfaces.IServices.Identity;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystem.Services.Identity;
 
@@ -18,15 +16,13 @@ public class UserService : IUserService
     private readonly IUserRepository _userRepository;
     private readonly IRoleRepository _roleRepository;
     private readonly IUserInfoRepository _userInfoRepository;
-    private readonly EducationSystemDbContext _context;
     private readonly IMapper _mapper;
 
     public UserService(UserManager<User> userManager,
         RoleManager<Role> roleManager,
-        IUserRepository userRepository, 
+        IUserRepository userRepository,
         IRoleRepository roleRepository,
         IUserInfoRepository userInfoRepository,
-        EducationSystemDbContext context, 
         IMapper mapper)
     {
         _userManager = userManager;
@@ -34,7 +30,6 @@ public class UserService : IUserService
         _userRepository = userRepository;
         _roleRepository = roleRepository;
         _userInfoRepository = userInfoRepository;
-        _context = context;
         _mapper = mapper;
     }
 
@@ -107,20 +102,7 @@ public class UserService : IUserService
     {
         var response = new BaseResponse<List<GetUserDto>>();
 
-        var users = await (from u in _userManager.Users
-            join ur in _context.UserRole on u.Id equals ur.UserId
-            join ui in _context.UserInfo on u.Id equals ui.UserId into uid
-            from ui in uid.DefaultIfEmpty()
-            where request.RoleId == 0 || ur.RoleId == request.RoleId
-            select new GetUserDto
-            {
-                Id = u.Id,
-                RoleId = ur.RoleId,
-                Email = u.Email,
-                UserName = u.UserName,
-                PhoneNumber = u.PhoneNumber,
-                UserInfo = _mapper.Map<GetUserInfoDto>(ui)
-            }).Skip(request.Skip).Take(request.Take).ToListAsync();
+        var users = await _userRepository.GetByPaginationAsync(request);
 
         response.Data = users;
         return response;
@@ -179,18 +161,45 @@ public class UserService : IUserService
 
         if (request.UserInfo != null)
         {
-            // var isValidInfo = await ValidateUserInfo(request.UserInfo);
-            //
-            // if (isValidInfo == false)
-            // {
-            //     response.Description = $"Обнаружены ошибки в переданных данных пользовательской информации. Проверьте данные и повторите попытку";
-            // }
+            var userInfo = await _userInfoRepository.GetByUserId(user.Id);
 
-            var userInfo = _mapper.Map<UserInfo>(request.UserInfo);
+            if (userInfo == null)
+            {
+                userInfo = new UserInfo()
+                {
+                    UserId = user.Id,
+                    FirstName = request.UserInfo.FirstName ?? string.Empty,
+                    LastName = request.UserInfo.LastName ?? string.Empty,
+                    Patronymic = request.UserInfo.Patronymic ?? string.Empty,
+                    Birthday = request.UserInfo.Birthday ?? default
+                };
 
-            userInfo.UserId = user.Id;
-
-            await _userInfoRepository.CreateAsync(userInfo);
+                await _userInfoRepository.CreateAsync(userInfo);
+            }
+            else
+            {
+                if (userInfo.FirstName != request.UserInfo.FirstName)
+                {
+                    userInfo.FirstName = request.UserInfo.FirstName;
+                }
+                
+                if (userInfo.LastName != request.UserInfo.LastName)
+                {
+                    userInfo.LastName = request.UserInfo.LastName;
+                }
+                
+                if (userInfo.Patronymic != request.UserInfo.Patronymic)
+                {
+                    userInfo.Patronymic = request.UserInfo.Patronymic;
+                }
+                
+                if (userInfo.Birthday != request.UserInfo.Birthday)
+                {
+                    userInfo.Birthday = request.UserInfo.Birthday;
+                }
+                
+                await _userInfoRepository.UpdateAsync(userInfo);
+            }
         }
 
         var mapUser = _mapper.Map<GetUserDto>(user);
@@ -204,6 +213,13 @@ public class UserService : IUserService
         var response = new BaseResponse<GetUserDto>();
 
         var user = await _userManager.FindByIdAsync(userId.ToString());
+
+        if (user == null)
+        {
+            response.IsError = true;
+            response.Description = $"Пользователь с id - {userId} не найден";
+            return response;
+        }
 
         if (!string.IsNullOrEmpty(request.Email))
         {
@@ -236,18 +252,45 @@ public class UserService : IUserService
 
         if (request.UserInfo != null)
         {
-            // var isValidInfo = await ValidateUserInfo(request.UserInfo);
-            //
-            // if (isValidInfo == false)
-            // {
-            //     response.Description = $"Ошибки в переданных данных пользовательской информации. Проверьте данные и повторите попытку добавить данные";
-            // }
+            var userInfo = await _userInfoRepository.GetByUserId(userId);
 
-            var userInfo = _mapper.Map<UserInfo>(request.UserInfo);
+            if (userInfo == null)
+            {
+                userInfo = new UserInfo()
+                {
+                    UserId = userId,
+                    FirstName = request.UserInfo.FirstName ?? string.Empty,
+                    LastName = request.UserInfo.LastName ?? string.Empty,
+                    Patronymic = request.UserInfo.Patronymic ?? string.Empty,
+                    Birthday = request.UserInfo.Birthday ?? default
+                };
 
-            userInfo.UserId = user.Id;
-
-            await _userInfoRepository.CreateAsync(userInfo);
+                await _userInfoRepository.CreateAsync(userInfo);
+            }
+            else
+            {
+                if (userInfo.FirstName != request.UserInfo.FirstName)
+                {
+                    userInfo.FirstName = request.UserInfo.FirstName;
+                }
+                
+                if (userInfo.LastName != request.UserInfo.LastName)
+                {
+                    userInfo.LastName = request.UserInfo.LastName;
+                }
+                
+                if (userInfo.Patronymic != request.UserInfo.Patronymic)
+                {
+                    userInfo.Patronymic = request.UserInfo.Patronymic;
+                }
+                
+                if (userInfo.Birthday != request.UserInfo.Birthday)
+                {
+                    userInfo.Birthday = request.UserInfo.Birthday;
+                }
+                
+                await _userInfoRepository.UpdateAsync(userInfo);
+            }
         }
 
         var mapUser = _mapper.Map<GetUserDto>(user);

@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.User;
+﻿using EducationSystem.Dto.Identity.User;
 using EducationSystem.Entities.Base;
 using EducationSystem.Entities.DbModels.Identity;
 

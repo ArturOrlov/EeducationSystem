@@ -1,5 +1,7 @@
-﻿namespace EducationSystem.Interfaces.IRepositories.Material.Lecture;
+﻿using EducationSystem.Entities.DbModels.Material.Lecture;
 
-public interface IUserLectureRepository
+namespace EducationSystem.Interfaces.IRepositories.Material.Lecture;
+
+public interface IUserLectureRepository : IGenericRepository<UserLecture>
 {
 }

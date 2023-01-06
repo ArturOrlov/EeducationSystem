@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Lecture;
+﻿using EducationSystem.Dto.Material.Lecture;
 using EducationSystem.Entities.Base;
 
 namespace EducationSystem.Interfaces.IServices.Material.Lecture;

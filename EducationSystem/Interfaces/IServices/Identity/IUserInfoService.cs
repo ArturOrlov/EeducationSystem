@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.UserInfo;
+﻿using EducationSystem.Dto.Identity.UserInfo;
 using EducationSystem.Entities.Base;
 
 namespace EducationSystem.Interfaces.IServices.Identity;

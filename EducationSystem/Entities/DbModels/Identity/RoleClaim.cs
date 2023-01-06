@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Identity;
 
 /// <summary>
-/// 
+/// Разрешения роли
 /// </summary>
 public class RoleClaim : IdentityRoleClaim<int>
 {

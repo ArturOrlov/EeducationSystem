@@ -1,5 +1,7 @@
-﻿namespace EducationSystem.Interfaces.IRepositories.Material.LaboratoryWork;
+﻿using EducationSystem.Entities.DbModels.Material.LaboratoryWork;
 
-public interface IUserLaboratoryWorkRepository
+namespace EducationSystem.Interfaces.IRepositories.Material.LaboratoryWork;
+
+public interface IUserLaboratoryWorkRepository : IGenericRepository<UserLaboratoryWork>
 {
 }

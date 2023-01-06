@@ -5,20 +5,15 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Identity;
 
 /// <summary>
-/// 
+/// Рефреш токен
 /// </summary>
 public class RefreshToken : BaseEntity<int>
 {
     /// <summary>
     /// Id устройства
     /// </summary>
-    [Column("DeviceId"), Comment("Id устройства")]
+    [Column("DeviceId"), Comment("Id устройства с которого был выполнен вход")]
     public int DeviceId { get; set; }
-        
-    /// <summary>
-    /// Устройство с которого был выполнен вход"
-    /// </summary>
-    [Column("Device"), Comment("Устройство с которого был выполнен вход")]
     public Device Device { get; set; }
         
     /// <summary>

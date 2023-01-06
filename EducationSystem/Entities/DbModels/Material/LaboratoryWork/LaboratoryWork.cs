@@ -5,10 +5,16 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Material.LaboratoryWork;
 
 /// <summary>
-/// Лабораторная работа
+/// Материал - Лабораторная работа
 /// </summary>
 public class LaboratoryWork : BaseEntity<int>
 {
+    /// <summary>
+    /// Название лабораторной работы
+    /// </summary>
+    [Column("Name"), Comment("Название лабораторной работы")]
+    public string Name { get; set; }
+    
     /// <summary>
     /// Уникальный идентификатор курса
     /// </summary>
@@ -17,10 +23,10 @@ public class LaboratoryWork : BaseEntity<int>
     public Course Course { get; set; }
     
     /// <summary>
-    /// TODO
+    /// Ссылка на материал лабораторной работы
     /// </summary>
-    [Column("Material"), Comment("TODO")]
-    public string Material { get; set; }
+    [Column("MaterialUrl"), Comment("Ссылка на материал лабораторной работы")]
+    public string MaterialUrl { get; set; }
     
     /// <summary>
     /// Статус доступа к курсу

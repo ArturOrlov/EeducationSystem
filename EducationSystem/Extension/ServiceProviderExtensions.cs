@@ -37,6 +37,9 @@ public static class ServiceProviderExtensions
         services.AddSingleton(TypeAdapterConfig.GlobalSettings);
         services.AddScoped<IMapper, ServiceMapper>();
         
+        services.AddTransient<IFileService, FileService>();
+        services.AddTransient<IReportService, ReportService>();
+        
         services.AddTransient<IRoleService, RoleService>();
         services.AddTransient<IUserService, UserService>();
         services.AddTransient<IUserRoleService, UserRoleService>();

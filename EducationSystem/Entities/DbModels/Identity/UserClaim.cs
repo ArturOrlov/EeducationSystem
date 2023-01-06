@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Identity;
 
 /// <summary>
-/// 
+/// Разрешения пользователя
 /// </summary>
 public class UserClaim : IdentityUserClaim<int>
 {

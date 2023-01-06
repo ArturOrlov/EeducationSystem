@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Materail.LaboratoryWork;
+﻿using EducationSystem.Dto.Material.LaboratoryWork;
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices.Material.LaboratoryWork;
@@ -58,7 +58,7 @@ public class LaboratoryWorkController : ControllerBaseExtension
         OperationId = "LaboratoryWork.Create",
         Tags = new[] { "LaboratoryWork" }
     )]
-    public async Task<IActionResult> Create([FromBody] CreateLaboratoryWorkDto request)
+    public async Task<IActionResult> Create([FromForm] CreateLaboratoryWorkDto request)
     {
         var response = await _laboratoryWorkService.CreateLaboratoryWorkAsync(request);
 

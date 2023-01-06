@@ -1,4 +1,4 @@
-﻿namespace EducationSystem.Dto.Role;
+﻿namespace EducationSystem.Dto.Identity.Role;
 
 public class GetRoleDto
 {

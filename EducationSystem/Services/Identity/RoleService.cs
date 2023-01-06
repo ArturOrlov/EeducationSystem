@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Role;
+﻿using EducationSystem.Dto.Identity.Role;
 using EducationSystem.Entities.Base;
 using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IRepositories.Identity;
@@ -46,18 +46,16 @@ public class RoleService : IRoleService
     {
         var response = new BaseResponse<List<GetRoleDto>>();
 
-        var roles = _roleManager.Roles.ToList();
+        var roles = _roleManager.Roles.Skip(request.Skip).Take(request.Take).ToList();
 
         if (!roles.Any())
         {
             return response;
         }
 
-        roles = roles.Skip(request.Skip).Take(request.Take).ToList();
+        var mapRoles = _mapper.Map<List<GetRoleDto>>(roles);
 
-        var mapHomework = _mapper.Map<List<GetRoleDto>>(roles);
-
-        response.Data = mapHomework;
+        response.Data = mapRoles;
         return response;
     }
 

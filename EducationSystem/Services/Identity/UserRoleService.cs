@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.UserRole;
+﻿using EducationSystem.Dto.Identity.UserRole;
 using EducationSystem.Entities.Base;
 using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IRepositories.Identity;

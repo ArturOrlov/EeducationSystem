@@ -1,4 +1,4 @@
-﻿namespace EducationSystem.Dto.User;
+﻿namespace EducationSystem.Dto.Identity.User;
 
 public class UserDataDto
 {

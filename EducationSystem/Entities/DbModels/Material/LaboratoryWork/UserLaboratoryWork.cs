@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Material.LaboratoryWork;
 
 /// <summary>
-/// 
+/// Результат прохождения лабораторной работы пользователя
 /// </summary>
 public class UserLaboratoryWork : BaseEntity<int>
 {
@@ -23,10 +23,10 @@ public class UserLaboratoryWork : BaseEntity<int>
     [Column("LaboratoryWorkId"), Comment("Уникальный идентификатор леции")]
     public int LaboratoryWorkId { get; set; }
     public LaboratoryWork LaboratoryWork { get; set; }
-    
+
     /// <summary>
     /// Оценка
     /// </summary>
     [Column("Value"), Comment("todo")]
-    public int? Value { get; set; }
+    public float? Value { get; set; }
 }

@@ -109,6 +109,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "ElectronicDiary backend API"); });
 }
 
+// app.UseStaticFiles(new StaticFileOptions
+// {
+//     FileProvider = new PhysicalFileProvider(Path.Combine(env.WebRootPath, FileSettings.STATIC_FILES_PATH_PREFIX)),
+//     RequestPath = "/" + FileSettings.STATIC_FILES_PATH_PREFIX
+// });
+
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -9,9 +9,9 @@ public class ControllerBaseExtension : ControllerBase
     {
         if (response.IsError)
         {
-            return BadRequest(response.Description);
+            return BadRequest(response);
         }
 
-        return Ok(response.Data);
+        return Ok(response);
     }
 }

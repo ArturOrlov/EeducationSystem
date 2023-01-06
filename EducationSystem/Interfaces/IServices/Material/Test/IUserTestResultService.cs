@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Test;
+﻿using EducationSystem.Dto.Material.Test.UserResult;
 using EducationSystem.Entities.Base;
 
 namespace EducationSystem.Interfaces.IServices.Material.Test;
@@ -8,9 +8,9 @@ public interface IUserTestResultService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="testId"></param>
+    /// <param name="userTestResultId"></param>
     /// <returns></returns>
-    Task<BaseResponse<GetUserTestResultDto>> GetUserTestResultByIdAsync(int testId);
+    Task<BaseResponse<GetUserTestResultDto>> GetUserTestResultByIdAsync(int userTestResultId);
     
     /// <summary>
     /// 
@@ -29,15 +29,15 @@ public interface IUserTestResultService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="testId"></param>
+    /// <param name="userTestResultId"></param>
     /// <param name="request"></param>
     /// <returns></returns>
-    Task<BaseResponse<GetUserTestResultDto>> UpdateUserTestResultByIdAsync(int testId, UpdateUserTestResultDto request);
+    Task<BaseResponse<GetUserTestResultDto>> UpdateUserTestResultByIdAsync(int userTestResultId, UpdateUserTestResultDto request);
     
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="testId"></param>
+    /// <param name="userTestResultId"></param>
     /// <returns></returns>
-    Task<BaseResponse<string>> DeleteUserTestResultByIdAsync(int testId);
+    Task<BaseResponse<string>> DeleteUserTestResultByIdAsync(int userTestResultId);
 }

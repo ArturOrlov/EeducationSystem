@@ -1,6 +1,8 @@
-﻿namespace EducationSystem.Interfaces.IRepositories;
+﻿using EducationSystem.Entities.DbModels;
 
-public interface ICourseRepository
+namespace EducationSystem.Interfaces.IRepositories;
+
+public interface ICourseRepository : IGenericRepository<Course>
 {
     
 }

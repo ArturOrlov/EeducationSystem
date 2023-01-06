@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Test;
+﻿using EducationSystem.Dto.Material.Test;
 using EducationSystem.Entities.Base;
 
 namespace EducationSystem.Interfaces.IServices.Material.Test;

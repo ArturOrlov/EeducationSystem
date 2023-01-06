@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Lecture;
+﻿using EducationSystem.Dto.Material.Lecture;
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices.Material.Lecture;
@@ -58,7 +58,7 @@ public class LectureController : ControllerBaseExtension
         OperationId = "Lecture.Create",
         Tags = new[] { "Lecture" }
     )]
-    public async Task<IActionResult> Create([FromBody] CreateLectureDto request)
+    public async Task<IActionResult> Create([FromForm] CreateLectureDto request)
     {
         var response = await _lectureService.CreateLectureAsync(request);
 

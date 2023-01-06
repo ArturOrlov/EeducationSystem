@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using EducationSystem.Dto.User;
+using EducationSystem.Dto.Identity.User;
 
 namespace EducationSystem.Extension;
 

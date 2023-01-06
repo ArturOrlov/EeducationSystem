@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Identity;
 
 /// <summary>
-/// 
+/// Устройство (через которое был выполнен вход)
 /// </summary>
 public class Device : BaseEntity<int>
 {
@@ -14,11 +14,6 @@ public class Device : BaseEntity<int>
     /// </summary>
     [Column("UserId"), Comment("Id пользователя")]
     public int UserId { get; set; }
-
-    /// <summary>
-    /// Пользователь
-    /// </summary>
-    [Column("User"), Comment("Пользователь")]
     public User User { get; set; }
         
     /// <summary>
@@ -32,10 +27,4 @@ public class Device : BaseEntity<int>
     /// </summary>
     [Column("UserAgent"), Comment("Устройство входа")]
     public string UserAgent { get; set; }
-    //
-    // /// <summary>
-    // /// Рефреш токен
-    // /// </summary>
-    // [Column("RefreshToken"), Comment("Рефреш токен")]
-    // public RefreshToken RefreshToken { get; set; }
 }

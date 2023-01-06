@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.UserRole;
+﻿using EducationSystem.Dto.Identity.UserRole;
 using EducationSystem.Entities.Base;
 
 namespace EducationSystem.Interfaces.IServices.Identity;

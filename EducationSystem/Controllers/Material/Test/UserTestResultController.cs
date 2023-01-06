@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Test;
+﻿using EducationSystem.Dto.Material.Test.UserResult;
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices.Material.Test;
@@ -49,12 +49,12 @@ public class UserTestResultController : ControllerBaseExtension
 
         return Response(response);
     }
-
+    
     [HttpPost]
     [Route("")]
     [SwaggerOperation(
         Summary = "Создать пользователь-результат теста",
-        Description = "Создать пользователь-результат теста",
+        Description = "Принимаются данные результата ответа теста. на их основе считается результат",
         OperationId = "UserTestResult.Create",
         Tags = new[] { "Test" }
     )]

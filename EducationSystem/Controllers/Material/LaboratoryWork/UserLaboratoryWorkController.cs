@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Materail.LaboratoryWork;
+﻿using EducationSystem.Dto.Material.LaboratoryWork;
 using EducationSystem.Entities.Base;
 using EducationSystem.Extension;
 using EducationSystem.Interfaces.IServices.Material.LaboratoryWork;

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Entities.DbModels.Identity;
 
 /// <summary>
-/// 
+/// Токен
 /// </summary>
 public class VerificationToken : BaseEntity<int>
 {
@@ -22,7 +22,7 @@ public class VerificationToken : BaseEntity<int>
     public string Token { get; set; }
 
     /// <summary>
-    /// Id устройства"
+    /// Id устройства
     /// </summary>
     [Column("Data"), Comment("Id устройства")]
     public string Data { get; set; }

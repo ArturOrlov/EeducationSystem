@@ -22,6 +22,46 @@ namespace EducationSystem.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsActive")
+                        .HasComment("Статус доступа к курсу");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Name")
+                        .HasComment("Название курса");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Course", "Education");
+                });
+
             modelBuilder.Entity("EducationSystem.Entities.DbModels.Dictionaries.ApplicationSettings", b =>
                 {
                     b.Property<int>("Id")
@@ -34,29 +74,35 @@ namespace EducationSystem.Migrations
 
                     b.Property<string>("Alias")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Alias")
+                        .HasComment("Описание");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Name")
+                        .HasComment("Имя (название) настройки");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
 
                     b.Property<string>("Value")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("Value")
+                        .HasComment("Значение настройки");
 
                     b.HasKey("Id");
 
@@ -75,19 +121,19 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
 
                     b.Property<DateTime>("LastLoginTime")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("LastLoginTime")
                         .HasComment("Последние время входа в систему");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -122,7 +168,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
@@ -130,10 +176,10 @@ namespace EducationSystem.Migrations
                     b.Property<int>("DeviceId")
                         .HasColumnType("integer")
                         .HasColumnName("DeviceId")
-                        .HasComment("Id устройства");
+                        .HasComment("Id устройства с которого был выполнен вход");
 
                     b.Property<DateTime>("ExpireTime")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("ExpireTime")
                         .HasComment("Время истечения рефреш токена");
 
@@ -145,15 +191,14 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DeviceId")
-                        .IsUnique();
+                    b.HasIndex("DeviceId");
 
                     b.ToTable("RefreshToken", "Identity");
                 });
@@ -172,7 +217,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
@@ -187,7 +232,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -218,7 +263,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
@@ -261,7 +306,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -293,13 +338,13 @@ namespace EducationSystem.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("Birthday")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("Birthday")
                         .HasComment("Дата рождения пользователя");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
@@ -324,7 +369,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -351,14 +396,14 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -382,7 +427,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
@@ -401,7 +446,7 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -409,6 +454,439 @@ namespace EducationSystem.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("VerificationToken", "Identity");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.LaboratoryWork.LaboratoryWork", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("integer")
+                        .HasColumnName("CourseId")
+                        .HasComment("Уникальный идентификатор курса");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsActive")
+                        .HasComment("Статус доступа к курсу");
+
+                    b.Property<string>("MaterialUrl")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("MaterialUrl")
+                        .HasComment("Ссылка на материал лабораторной работы");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Name")
+                        .HasComment("Название лабораторной работы");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("LaboratoryWork", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.LaboratoryWork.UserLaboratoryWork", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<int>("LaboratoryWorkId")
+                        .HasColumnType("integer")
+                        .HasColumnName("LaboratoryWorkId")
+                        .HasComment("Уникальный идентификатор леции");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("UserId")
+                        .HasComment("Уникальный идентификатор пользователя");
+
+                    b.Property<float?>("Value")
+                        .HasColumnType("real")
+                        .HasColumnName("Value")
+                        .HasComment("todo");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LaboratoryWorkId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLaboratoryWork", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Lecture.Lecture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("integer")
+                        .HasColumnName("CourseId")
+                        .HasComment("Уникальный идентификатор курса");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsActive")
+                        .HasComment("Статус доступа к курсу");
+
+                    b.Property<string>("MaterialUrl")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("MaterialUrl")
+                        .HasComment("Ссылка на материал лекции");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Name")
+                        .HasComment("Название лекции");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Lecture", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Lecture.UserLecture", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsRead")
+                        .HasComment("Статус прохождения лекции");
+
+                    b.Property<int>("LectureId")
+                        .HasColumnType("integer")
+                        .HasColumnName("LectureId")
+                        .HasComment("Уникальный идентификатор леции");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("UserId")
+                        .HasComment("Уникальный идентификатор пользователя");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LectureId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserLecture", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.Test", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CourseId")
+                        .HasColumnType("integer")
+                        .HasColumnName("CourseId")
+                        .HasComment("Уникальный идентификатор курса");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Description")
+                        .HasComment("Описание теста");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsActive")
+                        .HasComment("Статус доступа к тесту");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Name")
+                        .HasComment("Название теста");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
+
+                    b.ToTable("Test", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.TestAnswer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("boolean")
+                        .HasColumnName("IsCorrect")
+                        .HasComment("Флаг. является ли ответ правильным");
+
+                    b.Property<string>("QuestionAnswer")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("QuestionAnswer")
+                        .HasComment("Описание ответа");
+
+                    b.Property<int>("TestQuestionId")
+                        .HasColumnType("integer")
+                        .HasColumnName("TestQuestionId")
+                        .HasComment("Уникальный идентификатор вопроса теста");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestQuestionId");
+
+                    b.ToTable("TestAnswer", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.TestQuestion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Image")
+                        .HasComment("Изображение для вопроса");
+
+                    b.Property<string>("QuestionDescription")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("QuestionDescription")
+                        .HasComment("Описание вопроса теста");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("integer")
+                        .HasColumnName("TestId")
+                        .HasComment("Уникальный идентификатор теста");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestId");
+
+                    b.ToTable("TestQuestion", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.UserTestResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<int>("TestId")
+                        .HasColumnType("integer")
+                        .HasColumnName("TestId")
+                        .HasComment("Уникальный идентификатор теста");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("UserId")
+                        .HasComment("Уникальный идентификатор пользовтеля");
+
+                    b.Property<float>("Value")
+                        .HasColumnType("real")
+                        .HasColumnName("Value")
+                        .HasComment("Оценка по количеству правильных ответов");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTestResult", "Material");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Subject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("Id")
+                        .HasComment("Уникальный идентификатор сущности");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("CreatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата создания сущности");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("Name")
+                        .HasComment("Название предмета");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("UpdatedAt")
+                        .HasDefaultValueSql("NOW()")
+                        .HasComment("Дата последнего обновления сущности");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Subject", "Education");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -505,14 +983,14 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -526,14 +1004,14 @@ namespace EducationSystem.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("CreatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата создания сущности");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("UpdatedAt")
                         .HasDefaultValueSql("NOW()")
                         .HasComment("Дата последнего обновления сущности");
@@ -555,8 +1033,8 @@ namespace EducationSystem.Migrations
             modelBuilder.Entity("EducationSystem.Entities.DbModels.Identity.RefreshToken", b =>
                 {
                     b.HasOne("EducationSystem.Entities.DbModels.Identity.Device", "Device")
-                        .WithOne("RefreshToken")
-                        .HasForeignKey("EducationSystem.Entities.DbModels.Identity.RefreshToken", "DeviceId")
+                        .WithMany()
+                        .HasForeignKey("DeviceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -587,6 +1065,118 @@ namespace EducationSystem.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.LaboratoryWork.LaboratoryWork", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.LaboratoryWork.UserLaboratoryWork", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Material.LaboratoryWork.LaboratoryWork", "LaboratoryWork")
+                        .WithMany()
+                        .HasForeignKey("LaboratoryWorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducationSystem.Entities.DbModels.Identity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("LaboratoryWork");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Lecture.Lecture", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Lecture.UserLecture", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Material.Lecture.Lecture", "Lecture")
+                        .WithMany()
+                        .HasForeignKey("LectureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducationSystem.Entities.DbModels.Identity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Lecture");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.Test", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.TestAnswer", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Material.Test.TestQuestion", "TestQuestion")
+                        .WithMany()
+                        .HasForeignKey("TestQuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("TestQuestion");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.TestQuestion", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Material.Test.Test", "Test")
+                        .WithMany()
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Test");
+                });
+
+            modelBuilder.Entity("EducationSystem.Entities.DbModels.Material.Test.UserTestResult", b =>
+                {
+                    b.HasOne("EducationSystem.Entities.DbModels.Material.Test.Test", "Test")
+                        .WithMany()
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EducationSystem.Entities.DbModels.Identity.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Test");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -640,12 +1230,6 @@ namespace EducationSystem.Migrations
                         .WithOne()
                         .HasForeignKey("EducationSystem.Entities.DbModels.Identity.UserClaim", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("EducationSystem.Entities.DbModels.Identity.Device", b =>
-                {
-                    b.Navigation("RefreshToken")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

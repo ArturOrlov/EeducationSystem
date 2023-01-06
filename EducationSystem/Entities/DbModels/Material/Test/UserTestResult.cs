@@ -5,12 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystem.Entities.DbModels.Material.Test;
 
+/// <summary>
+/// Результат прохождения теста пользователя
+/// </summary>
 public class UserTestResult : BaseEntity<int>
 {
     /// <summary>
     /// Уникальный идентификатор пользователя
     /// </summary>
-    [Column("UserId"), Comment("todo")]
+    [Column("UserId"), Comment("Уникальный идентификатор пользовтеля")]
     public int UserId { get; set; }
     public User User { get; set; }
     
@@ -22,9 +25,8 @@ public class UserTestResult : BaseEntity<int>
     public Test Test { get; set; }
     
     /// <summary>
-    /// Уникальный идентификатор ответа теста
+    /// Оценка по количеству правильных ответов
     /// </summary>
-    [Column("TestAnswerId"), Comment("Уникальный идентификатор ответа теста")]
-    public int TestAnswerId { get; set; }
-    public TestAnswer TestAnswer { get; set; }
+    [Column("Value"), Comment("Оценка по количеству правильных ответов")]
+    public float Value { get; set; }
 }

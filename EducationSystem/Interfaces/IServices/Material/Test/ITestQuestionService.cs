@@ -1,4 +1,4 @@
-﻿using EducationSystem.Dto.Test;
+﻿using EducationSystem.Dto.Material.Test.Question;
 using EducationSystem.Entities.Base;
 
 namespace EducationSystem.Interfaces.IServices.Material.Test;
@@ -8,9 +8,9 @@ public interface ITestQuestionService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="testId"></param>
+    /// <param name="testQuestionId"></param>
     /// <returns></returns>
-    Task<BaseResponse<GetTestQuestionDto>> GetTestQuestionByIdAsync(int testId);
+    Task<BaseResponse<GetTestQuestionDto>> GetTestQuestionByIdAsync(int testQuestionId);
     
     /// <summary>
     /// 
@@ -29,15 +29,15 @@ public interface ITestQuestionService
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="testId"></param>
+    /// <param name="testQuestionId"></param>
     /// <param name="request"></param>
     /// <returns></returns>
-    Task<BaseResponse<GetTestQuestionDto>> UpdateTestQuestionByIdAsync(int testId, UpdateTestQuestionDto request);
+    Task<BaseResponse<GetTestQuestionDto>> UpdateTestQuestionByIdAsync(int testQuestionId, UpdateTestQuestionDto request);
     
     /// <summary>
     /// 
     /// </summary>
-    /// <param name="testId"></param>
+    /// <param name="testQuestionId"></param>
     /// <returns></returns>
-    Task<BaseResponse<string>> DeleteTestQuestionByIdAsync(int testId);
+    Task<BaseResponse<string>> DeleteTestQuestionByIdAsync(int testQuestionId);
 }

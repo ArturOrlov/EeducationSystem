@@ -17,9 +17,9 @@ public class TestAnswer : BaseEntity<int>
     public TestQuestion TestQuestion { get; set; }
     
     /// <summary>
-    /// Описание вопроса ответа
+    /// Описание ответа
     /// </summary>
-    [Column("QuestionAnswer"), Comment("Описание ответа теста")]
+    [Column("QuestionAnswer"), Comment("Описание ответа")]
     public string QuestionAnswer { get; set; }
     
     /// <summary>
