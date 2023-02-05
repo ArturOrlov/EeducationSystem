@@ -15,6 +15,13 @@ public interface ISubjectService
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="subjectId"></param>
+    /// <returns></returns>
+    Task<BaseResponse<SubjectWithCourseDto>> GetSubjectWithCourseAsync(int subjectId);
+    
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
     Task<BaseResponse<List<GetSubjectDto>>> GetSubjectByPaginationAsync(BasePagination request);

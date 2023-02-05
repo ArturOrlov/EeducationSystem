@@ -1,5 +1,5 @@
 ﻿using EducationSystem.Context;
-using EducationSystem.Entities.DbModels.Dictionaries;
+using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IRepositories.Identity;
 using Microsoft.EntityFrameworkCore;
 

@@ -2,7 +2,7 @@
 using EducationSystem.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace EducationSystem.Entities.DbModels.Dictionaries;
+namespace EducationSystem.Entities.DbModels.Identity;
 
 /// <summary>
 /// Настройки приложения

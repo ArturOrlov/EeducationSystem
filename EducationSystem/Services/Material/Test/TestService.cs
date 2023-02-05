@@ -52,9 +52,9 @@ public class TestService : ITestService
             return response;
         }
 
-        var mapRoles = _mapper.Map<List<GetTestDto>>(tests);
+        var mapTests = _mapper.Map<List<GetTestDto>>(tests);
 
-        response.Data = mapRoles;
+        response.Data = mapTests;
         return response;
     }
 

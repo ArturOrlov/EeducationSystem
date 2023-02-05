@@ -15,6 +15,13 @@ public interface ICourseService
     /// <summary>
     /// 
     /// </summary>
+    /// <param name="courseId"></param>
+    /// <returns></returns>
+    Task<BaseResponse<CourseWithMaterialsDto>> GetCourseWithMaterialsAsync(int courseId);
+    
+    /// <summary>
+    /// 
+    /// </summary>
     /// <param name="request"></param>
     /// <returns></returns>
     Task<BaseResponse<List<GetCourseDto>>> GetCourseByPaginationAsync(BasePagination request);

@@ -2,7 +2,7 @@
 using EducationSystem.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace EducationSystem.Entities.DbModels;
+namespace EducationSystem.Entities.DbModels.Education;
 
 /// <summary>
 /// Предмет

@@ -14,6 +14,7 @@ using EducationSystem.Repositories.Material.LaboratoryWork;
 using EducationSystem.Repositories.Material.Lecture;
 using EducationSystem.Repositories.Material.Test;
 using EducationSystem.Services;
+using EducationSystem.Services.Education;
 using EducationSystem.Services.Identity;
 using EducationSystem.Services.Material.LaboratoryWork;
 using EducationSystem.Services.Material.Lecture;

@@ -1,5 +1,6 @@
 ﻿using EducationSystem.Context;
 using EducationSystem.Entities.DbModels;
+using EducationSystem.Entities.DbModels.Education;
 using EducationSystem.Interfaces.IRepositories;
 
 namespace EducationSystem.Repositories;

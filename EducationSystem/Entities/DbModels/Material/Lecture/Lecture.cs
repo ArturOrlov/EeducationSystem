@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using EducationSystem.Entities.Base;
+using EducationSystem.Entities.DbModels.Education;
 using Microsoft.EntityFrameworkCore;
 
 namespace EducationSystem.Entities.DbModels.Material.Lecture;

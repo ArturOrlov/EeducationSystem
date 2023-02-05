@@ -1,21 +1,25 @@
-﻿using EducationSystem.Dto.Subject;
+﻿using EducationSystem.Dto.Course;
+using EducationSystem.Dto.Subject;
 using EducationSystem.Entities.Base;
-using EducationSystem.Entities.DbModels;
+using EducationSystem.Entities.DbModels.Education;
 using EducationSystem.Interfaces.IRepositories;
 using EducationSystem.Interfaces.IServices;
 using MapsterMapper;
 
-namespace EducationSystem.Services;
+namespace EducationSystem.Services.Education;
 
 public class SubjectService : ISubjectService
 {
     private readonly ISubjectRepository _subjectRepository;
+    private readonly ICourseRepository _courseRepository;
     private readonly IMapper _mapper;
 
     public SubjectService(ISubjectRepository subjectRepository,
+        ICourseRepository courseRepository,
         IMapper mapper)
     {
         _subjectRepository = subjectRepository;
+        _courseRepository = courseRepository;
         _mapper = mapper;
     }
 
@@ -35,6 +39,33 @@ public class SubjectService : ISubjectService
         var mapSubject = _mapper.Map<GetSubjectDto>(subject);
 
         response.Data = mapSubject;
+        return response;
+    }
+
+    public async Task<BaseResponse<SubjectWithCourseDto>> GetSubjectWithCourseAsync(int subjectId)
+    {
+        var response = new BaseResponse<SubjectWithCourseDto>();
+        var model = new SubjectWithCourseDto();
+
+        var subject = await _subjectRepository.GetByIdAsync(subjectId);
+
+        if (subject == null)
+        {
+            response.IsError = true;
+            response.Description = $"Предмет с id - {subjectId} не найден";
+            return response;
+        }
+
+        model.Subject = _mapper.Map<GetSubjectDto>(subject);
+
+        var courses = _courseRepository.Get(c => c.SubjectId == subjectId).ToList();
+
+        if (courses.Any())
+        {
+            model.Courses = _mapper.Map<List<GetCourseDto>>(courses);
+        }
+
+        response.Data = model;
         return response;
     }
 

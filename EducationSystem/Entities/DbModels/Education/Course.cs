@@ -2,7 +2,7 @@
 using EducationSystem.Entities.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace EducationSystem.Entities.DbModels;
+namespace EducationSystem.Entities.DbModels.Education;
 
 /// <summary>
 /// Курс
@@ -14,6 +14,13 @@ public class Course : BaseEntity<int>
     /// </summary>
     [Column("Name"), Comment("Название курса")]
     public string Name { get; set; }
+    
+    /// <summary>
+    /// Название курса
+    /// </summary>
+    [Column("SubjectId"), Comment("Уникальный идентификатор предмета")]
+    public int? SubjectId { get; set; }
+    public Subject? Subject { get; set; }
     
     /// <summary>
     /// Статус доступа к курсу

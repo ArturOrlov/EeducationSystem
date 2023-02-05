@@ -3,6 +3,7 @@ using System;
 using EducationSystem.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace EducationSystem.Migrations
 {
     [DbContext(typeof(EducationSystemDbContext))]
-    partial class EducationSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230205161259_AddNewColumnSubjectIdForCourse")]
+    partial class AddNewColumnSubjectIdForCourse
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

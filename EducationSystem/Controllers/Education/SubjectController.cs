@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 
-namespace EducationSystem.Controllers.Material;
+namespace EducationSystem.Controllers.Education;
 
 [Authorize]
 [ApiController]
@@ -26,7 +26,7 @@ public class SubjectController : ControllerBaseExtension
         Summary = "Получить предмет по его id",
         Description = "Получить предмет по его id",
         OperationId = "Subject.Get.ById",
-        Tags = new[] { "Subject" }
+        Tags = new[] { "Education.Subject" }
     )]
     public async Task<IActionResult> GetById([FromRoute] int subjectId)
     {
@@ -36,12 +36,27 @@ public class SubjectController : ControllerBaseExtension
     }
 
     [HttpGet]
+    [Route("{subjectId:int}/with-course")]
+    [SwaggerOperation(
+        Summary = "Получить предмет с курсами",
+        Description = "Получить предмет с курсами",
+        OperationId = "Subject.Get.WithCourse",
+        Tags = new[] { "Education.Subject" }
+    )]
+    public async Task<IActionResult> GetWithCourse([FromRoute] int subjectId)
+    {
+        var response = await _subjectService.GetSubjectWithCourseAsync(subjectId);
+
+        return Response(response);
+    }
+    
+    [HttpGet]
     [Route("")]
     [SwaggerOperation(
         Summary = "Получить предметы по фильтрам",
         Description = "Получить предметы по фильтрам",
         OperationId = "Subject.Get.List",
-        Tags = new[] { "Subject" }
+        Tags = new[] { "Education.Subject" }
     )]
     public async Task<IActionResult> GetAll([FromQuery] BasePagination request)
     {
@@ -50,13 +65,14 @@ public class SubjectController : ControllerBaseExtension
         return Response(response);
     }
 
+
     [HttpPost]
     [Route("")]
     [SwaggerOperation(
         Summary = "Создать предмет",
         Description = "Создать предмет",
         OperationId = "Subject.Create",
-        Tags = new[] { "Subject" }
+        Tags = new[] { "Education.Subject" }
     )]
     public async Task<IActionResult> Create([FromBody] CreateSubjectDto request)
     {
@@ -71,7 +87,7 @@ public class SubjectController : ControllerBaseExtension
         Summary = "Обновить предмет по его id",
         Description = "Обновить предмет по его id",
         OperationId = "Subject.Update.ById",
-        Tags = new[] { "Subject" }
+        Tags = new[] { "Education.Subject" }
     )]
     public async Task<IActionResult> Update([FromRoute] int subjectId, [FromBody] UpdateSubjectDto request)
     {
@@ -86,7 +102,7 @@ public class SubjectController : ControllerBaseExtension
         Summary = "Удалить предмет по его id",
         Description = "Удалить предмет по его id",
         OperationId = "Subject.Delete.ById",
-        Tags = new[] { "Subject" }
+        Tags = new[] { "Education.Subject" }
     )]
     public async Task<IActionResult> Delete([FromRoute] int subjectId)
     {

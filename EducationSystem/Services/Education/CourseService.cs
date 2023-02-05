@@ -1,21 +1,37 @@
 ﻿using EducationSystem.Dto.Course;
+using EducationSystem.Dto.Material;
+using EducationSystem.Dto.Material.LaboratoryWork;
+using EducationSystem.Dto.Material.Lecture;
+using EducationSystem.Dto.Material.Test;
 using EducationSystem.Entities.Base;
-using EducationSystem.Entities.DbModels;
+using EducationSystem.Entities.DbModels.Education;
 using EducationSystem.Interfaces.IRepositories;
+using EducationSystem.Interfaces.IRepositories.Material.LaboratoryWork;
+using EducationSystem.Interfaces.IRepositories.Material.Lecture;
+using EducationSystem.Interfaces.IRepositories.Material.Test;
 using EducationSystem.Interfaces.IServices;
 using MapsterMapper;
 
-namespace EducationSystem.Services;
+namespace EducationSystem.Services.Education;
 
 public class CourseService : ICourseService
 {
     private readonly ICourseRepository _courseRepository;
+    private readonly ITestRepository _testRepository;
+    private readonly ILectureRepository _lectureRepository;
+    private readonly ILaboratoryWorkRepository _laboratoryWorkRepository;
     private readonly IMapper _mapper;
 
-    public CourseService(ICourseRepository courseRepository,
+    public CourseService(ICourseRepository courseRepository, 
+        ITestRepository testRepository,
+        ILectureRepository lectureRepository,
+        ILaboratoryWorkRepository laboratoryWorkRepository,
         IMapper mapper)
     {
         _courseRepository = courseRepository;
+        _testRepository = testRepository;
+        _lectureRepository = lectureRepository;
+        _laboratoryWorkRepository = laboratoryWorkRepository;
         _mapper = mapper;
     }
 
@@ -35,6 +51,61 @@ public class CourseService : ICourseService
         var mapCourse = _mapper.Map<GetCourseDto>(course);
 
         response.Data = mapCourse;
+        return response;
+    }
+
+    public async Task<BaseResponse<CourseWithMaterialsDto>> GetCourseWithMaterialsAsync(int courseId)
+    {
+        var response = new BaseResponse<CourseWithMaterialsDto>();
+        var model = new CourseWithMaterialsDto
+        {
+            Materials = new MaterialsDto()
+            {
+                Lectures = new List<GetLectureDto>(),
+                LaboratoryWorks = new List<GetLaboratoryWorkDto>(),
+                Tests = new List<GetTestDto>()
+            }
+        };
+
+        var course = await _courseRepository.GetByIdAsync(courseId);
+        
+        if (course == null)
+        {
+            response.IsError = true;
+            response.Description = $"Курс с id - {courseId} не найден";
+            return response;
+        }
+        
+        model.Course = _mapper.Map<GetCourseDto>(course);
+
+        // Получаем все лекции курса
+        var lectures = _lectureRepository.Get(l => l.CourseId == courseId).ToList();
+
+        if (lectures.Any())
+        {
+            var mapLectures = _mapper.Map<List<GetLectureDto>>(lectures);
+            model.Materials.Lectures.AddRange(mapLectures);
+        }
+        
+        // Получаем все лабораторные работы курса
+        var laboratoryWorks = _laboratoryWorkRepository.Get(lb => lb.CourseId == courseId).ToList();
+        
+        if (laboratoryWorks.Any())
+        {
+            var mapLaboratoryWorks = _mapper.Map<List<GetLaboratoryWorkDto>>(laboratoryWorks);
+            model.Materials.LaboratoryWorks.AddRange(mapLaboratoryWorks);
+        }
+        
+        // Получаем все тесты курса
+        var tests = _testRepository.Get(t => t.CourseId == courseId).ToList();
+        
+        if (tests.Any())
+        {
+            var mapTests = _mapper.Map<List<GetTestDto>>(tests);
+            model.Materials.Tests.AddRange(mapTests);
+        }
+
+        response.Data = model;
         return response;
     }
 

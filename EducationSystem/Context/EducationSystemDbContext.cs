@@ -1,5 +1,5 @@
 ﻿using EducationSystem.Entities.DbModels;
-using EducationSystem.Entities.DbModels.Dictionaries;
+using EducationSystem.Entities.DbModels.Education;
 using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Entities.DbModels.Material.LaboratoryWork;
 using EducationSystem.Entities.DbModels.Material.Lecture;
@@ -11,11 +11,9 @@ using Microsoft.EntityFrameworkCore;
 namespace EducationSystem.Context;
 
 public class EducationSystemDbContext : IdentityDbContext<User, Role, int, IdentityUserClaim<int>, UserRole,
-    IdentityUserLogin<int>,
-    IdentityRoleClaim<int>, IdentityUserToken<int>>
+    IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
-    public EducationSystemDbContext(DbContextOptions<EducationSystemDbContext> options, IConfiguration configRoot) :
-        base(options)
+    public EducationSystemDbContext(DbContextOptions<EducationSystemDbContext> options, IConfiguration configRoot) : base(options)
     {
         _configRoot = (IConfigurationRoot)configRoot;
     }

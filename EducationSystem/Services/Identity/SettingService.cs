@@ -1,7 +1,7 @@
 ﻿using EducationSystem.Constants;
 using EducationSystem.Dto;
 using EducationSystem.Entities.Base;
-using EducationSystem.Entities.DbModels.Dictionaries;
+using EducationSystem.Entities.DbModels.Identity;
 using EducationSystem.Interfaces.IRepositories.Identity;
 using EducationSystem.Interfaces.IServices.Identity;
 using MapsterMapper;

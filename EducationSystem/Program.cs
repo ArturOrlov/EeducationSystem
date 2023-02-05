@@ -64,7 +64,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo()
     {
         Version = "v1",
-        Title = "ElectronicDiary Api",
+        Title = "EducationSystem Api",
         Description = "Dot Net Api"
     });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
